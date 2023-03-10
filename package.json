@@ -1,0 +1,70 @@
+{
+  "name": "smart-test-framework",
+  "version": "3.0.2",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "api-tests": "jest",
+    "ui-tests": "cypress run",
+    "parametrized list": "",
+    "clean-reports": "rm -rf reports/ui/",
+    "test": "npx cypress run",
+    "v4smoke:cli": "npm run clean-reports; npm run v4-smoke",
+    "v4-smoke": "npx cypress run --spec 'ui/features/patient_v4/v4_smoke_tests/{credentialed,quickpay}/*.feature'",
+    "merge:v4:smoke": "npx mochawesome-merge reports/ui/*.json > reports/ui/v4-smoke-tests.json",
+    "create:html:v4smoke": "npx marge reports/ui/v4-smoke-tests.json --timestamp mmddyyyy_HHMMss --inline",
+    "smokeTestV4:generateReport": "npm run v4smoke:cli; npm run merge:v4:smoke; npm run create:html:v4smoke",
+    "providerSmoke:cli": "npm run clean-reports; npm run provider-smoke",
+    "provider-smoke": "npx cypress run --spec 'ui/features/provider/smoke_tests/{date_format,location_settings,login_and_portal,payments,transaction_history,users_and_credentials}'",
+    "merge:provider:smoke": "npx mochawesome-merge reports/ui/*.json > reports/ui/provider-smoke-tests.json",
+    "create:html:providerSmoke": "npx marge reports/ui/provider-smoke-tests.json --timestamp mmddyyyy_HHMMss --inline",
+    "smokeTestProvider:generateReport": "npm run providerSmoke:cli; npm run merge:provider:smoke; npm run create:html:providerSmoke"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@adyen/api-library": "^13.0.0",
+    "@badeball/cypress-cucumber-preprocessor": "^15.1.4",
+    "@cucumber/cucumber": "^9.0.0",
+    "@js-joda/locale": "^4.8.9",
+    "@types/chai": "latest",
+    "@types/node": "latest",
+    "axios": "latest",
+    "browserify": "latest",
+    "browserify-fs": "latest",
+    "chai": "latest",
+    "cypress-maildev": "latest",
+    "cypress-wait-for-stable-dom": "latest",
+    "dotenv": "latest",
+    "js-joda": "latest",
+    "jsonpath": "latest",
+    "mocha": "latest",
+    "mochawesome": "latest",
+    "mochawesome-merge": "latest",
+    "mochawesome-report-generator": "latest",
+    "ts-node": "latest",
+    "typescript": "latest",
+    "uuid-v4": "latest"
+  },
+  "devDependencies": {
+    "@bahmutov/cypress-esbuild-preprocessor": "latest",
+    "@cypress/browserify-preprocessor": "latest",
+    "@js-joda/core": "latest",
+    "@js-joda/locale_en-us": "latest",
+    "@js-joda/timezone": "latest",
+    "cypress": "^12.7.0",
+    "cypress-file-upload": "latest",
+    "cypress-iframe": "latest",
+    "cypress-mochawesome-reporter": "latest",
+    "ts-loader": "latest",
+    "typedoc": "^0.22.18"
+  },
+  "jestJsonReporter": {
+    "outputFile": "reports/api/report.json"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": false,
+    "step_definitions": "ui/**/*.ts"
+  }
+}

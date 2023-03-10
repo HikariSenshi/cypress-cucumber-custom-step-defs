@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "target": "es6",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "noEmit": false,
+    "types": ["cypress","cypress-file-upload", "cypress-iframe","node"],
+    "resolveJsonModule": true,
+    "module": "es6",
+    "allowJs": true
+  },
+  "exclude": [
+    "node_modules",
+    "./api/features/stepdefs/**/*.steps.ts",
+    "./api/features/*.feature"
+  ],
+  "include": [
+    "./node_modules/cypress",
+    "./ui/**/*.ts",
+    "lib/**/*"
+  ]
+}
